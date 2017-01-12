@@ -59,13 +59,15 @@ Check [[https://doc.rust-lang.org/book/testing.html][the Book]] for more!
 [[http://www.steveklabnik.com/rust-issue-17340/][The Guide to Rust Strings]]
 
 * Where to start
-I would propose the following iterations:
-** Get comfortable with stdin
-** Write a function signature that takes a string and returns a vector of terms
-** Implement that function using the [[https://doc.rust-lang.org/std/primitive.str.html#method.split_whitespace][split_whitespace]] Method
-** Write unit tests for that function
-** Implement this function as an iterator
-** Adapt your unit tests to handle iterators. (Tip: use [[https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect][collect]])
-** Repeat for normalizers and stemmers
+Fork this repo. Clone it locally.
+
+Then I would propose the following iterations:
+- Get comfortable with stdin
+- Write a function signature that takes a string and returns a vector of terms
+- Implement that function using the [[https://doc.rust-lang.org/std/primitive.str.html#method.split_whitespace][split_whitespace]] Method
+- Write unit tests for that function
+- Implement this function as an iterator
+- Adapt your unit tests to handle iterators. (Tip: use [[https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect][collect]])
+- Repeat for normalizers and stemmers
 
 By then you should feel comfortable enough to go on on your own!
