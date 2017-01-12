@@ -1,0 +1,71 @@
+* Task
+Build a tool that takes a string through stdin and prints resulting terms to stdout seperated by newline.
+
+** What are terms?
+Terms are the result of [[https://en.wikipedia.org/wiki/Tokenization_(lexical_analysis)][tokenization]], [[https://en.wikipedia.org/wiki/Canonicalization][normalization]] and [[https://en.wikipedia.org/wiki/Stemming][stemming]] a string. 
+For example the sentence "This is a house" has four terms: "this" "is" "a" "house".
+
+** Requirements
+*** Flexibility and Genericy
+You want to build sustainable and reusable software.
+That is why you should think of a common [[https://doc.rust-lang.org/book/traits.html][trait]] for each tokenizers, normalizers and stemmers.
+Maybe you can also think of a common trait for all three of them. Or for a wrapper structure.
+
+*** Usability
+You should also think of a way how to chain them.
+If there are two tokenizers, three normalizers and seven stemmers the user should be able to chain them to his need.
+
+*** Performance
+Make these analyzers lazy! They should not do anything unless asked for results. 
+You might consider using [[https://doc.rust-lang.org/std/iter/trait.Iterator.html][iterators]] to achieve this. 
+
+*** Functionality
+For now the interfaces are more important than functionality. 
+A tokenizer that splits at non-alphanumeric chars, 
+a normalizer that lowercases every token and a very basic stemmer should suffice.
+
+*** Stability
+While using existing [[https://crates.io/][crates]] is ok, please make sure they are stable enough to be used in a stable product.
+Please also refrain from using the nightly release channel of rust.
+
+* How to start
+This repository contains a whitespace tokenizer in its simplest form.
+You can compile it using `cargo build` and run it with `cargo run`.
+But first you have to install rust:
+
+** Installing Rust
+See [[https://rustup.rs/][rustup.rs]] the official Rust installer.
+
+** Running the example tokenizer
+#+begin_src sh
+echo "this is a house" > test.txt
+cat test.txt | cargo run
+#+end_src
+
+#+RESULTS:
+| this  |
+| is    |
+| a     |
+| house |
+
+** Writing and running unittests
+The example code contains the structure of a test. 
+You can execute tests by running `cargo test`.
+Check [[https://doc.rust-lang.org/book/testing.html][the Book]] for more!
+
+** Resources
+[[https://doc.rust-lang.org/std/][Standard Library Reference]]
+[[https://doc.rust-lang.org/book/][The Book]]
+[[http://www.steveklabnik.com/rust-issue-17340/][The Guide to Rust Strings]]
+
+* Where to start
+I would propose the following iterations:
+** Get comfortable with stdin
+** Write a function signature that takes a string and returns a vector of terms
+** Implement that function using the [[https://doc.rust-lang.org/std/primitive.str.html#method.split_whitespace][split_whitespace]] Method
+** Write unit tests for that function
+** Implement this function as an iterator
+** Adapt your unit tests to handle iterators. (Tip: use [[https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect][collect]])
+** Repeat for normalizers and stemmers
+
+By then you should feel comfortable enough to go on on your own!
