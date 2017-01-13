@@ -37,7 +37,7 @@ impl Iterator for Stringsplitter {
 		if self.strings.len() <= 0 {
 			None
 		}else {
-		Some(self.strings.pop().unwrap().split_whitespace().map(ToOwned::to_owned).collect())
+			Some(self.strings.pop().unwrap().split_whitespace().map(ToOwned::to_owned).collect())
 		}
 	}
 }
@@ -52,13 +52,10 @@ impl Iterator for ToLowerCase {
 	type Item = String;
 	
 	fn next (&mut self) -> Option<String> {
-				let len = self.strings.len();
-		if len <= 0 {
+		if self.strings.len() <= 0 {
 			None
 		}else {
-		let vec: String = self.strings.last().unwrap().to_lowercase();
-		self.strings.remove(len - 1);
-		Some(vec)
+			Some(self.strings.pop().unwrap().to_lowercase())
 		}
 	}
 }
@@ -66,7 +63,6 @@ impl Iterator for ToLowerCase {
 #[cfg(test)]
 mod tests {
 	use super::split_string;
-	use super::stringsplitter;
 	use super::Stringsplitter;
 	
    
