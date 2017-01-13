@@ -34,13 +34,10 @@ impl Iterator for Stringsplitter {
 	type Item = Vec<String>;
 	
 	fn next(&mut self) -> Option<Vec<String>> {
-		let len = self.strings.len();
-		if len <= 0 {
+		if self.strings.len() <= 0 {
 			None
 		}else {
-		let vec: Vec<String> = self.strings.last().unwrap().split_whitespace().map(ToOwned::to_owned).collect();
-		self.strings.remove(len - 1);
-		Some(vec)
+		Some(self.strings.pop().unwrap().split_whitespace().map(ToOwned::to_owned).collect())
 		}
 	}
 }
@@ -69,6 +66,7 @@ impl Iterator for ToLowerCase {
 #[cfg(test)]
 mod tests {
 	use super::split_string;
+	use super::stringsplitter;
 	use super::Stringsplitter;
 	
    
@@ -93,6 +91,7 @@ mod tests {
 	fn split_iterator_test() {
 		let mut test = vec!["Das ist ein Haus".to_owned(), "Das ist ein Boot".to_owned(), "Das ist ein Auto".to_owned()];
 		let mut iter = Stringsplitter {strings: test};
+		//let result = iter.collect::<Vec<Vec<String>>>();
 		assert_eq!(iter.next().unwrap(), vec!["Das".to_owned(), "ist".to_owned(), "ein".to_owned(), "Auto".to_owned(), ]);
 		assert_eq!(iter.next().unwrap(), vec!["Das".to_owned(), "ist".to_owned(), "ein".to_owned(), "Boot".to_owned(), ]);
 		assert_eq!(iter.next().unwrap(), vec!["Das".to_owned(), "ist".to_owned(), "ein".to_owned(), "Haus".to_owned(), ]);
