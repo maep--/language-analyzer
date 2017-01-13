@@ -16,6 +16,9 @@ fn main() {
     }
     
 }
+
+// tokenization
+
 //function for returning a vector of whitespace-splitted words for a given string
 fn split_string(buf: &str) -> (Vec<&str>) {
 	return buf.split_whitespace().collect();
@@ -35,7 +38,7 @@ impl Iterator for Stringsplitter {
 		if len <= 0 {
 			None
 		}else {
-		let vec = self.strings.last().unwrap().split_whitespace().map(ToOwned::to_owned).collect();
+		let vec: Vec<String> = self.strings.last().unwrap().split_whitespace().map(ToOwned::to_owned).collect();
 		self.strings.remove(len - 1);
 		Some(vec)
 		}
@@ -43,6 +46,25 @@ impl Iterator for Stringsplitter {
 }
 
 
+// normalization to lowercase (vec<String> to x strings)
+struct ToLowerCase {
+	strings: Vec<String>
+}
+
+impl Iterator for ToLowerCase {
+	type Item = String;
+	
+	fn next (&mut self) -> Option<String> {
+				let len = self.strings.len();
+		if len <= 0 {
+			None
+		}else {
+		let vec: String = self.strings.last().unwrap().to_lowercase();
+		self.strings.remove(len - 1);
+		Some(vec)
+		}
+	}
+}
 
 #[cfg(test)]
 mod tests {
